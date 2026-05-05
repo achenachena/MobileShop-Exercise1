@@ -1,105 +1,60 @@
-# Exercise 1 — Kotlin Jetpack Compose Mobile Shop
+# Exercise 1 – Kotlin Jetpack Compose mobile shop
 
-**Type:** Individual  
-**Points:** 30 points  
-**Expected stack:** Kotlin + Jetpack Compose  
+This is my solution for Exercise 1 (30 pts).  
+The goal is a small shoe shop built with **Kotlin + Jetpack Compose** where users can pick items and see a running total in the shopping bag.
 
-## Assignment brief
+## What the app does
 
-Design and implement a mobile shop app with these core requirements:
+- Shows a **landing screen** similar to the handout.
+- Home screen:
+  - simple category chips (Lifestyle/Basketball/Running)
+  - grid of sample shoes
+  - quick “+” button to drop an item into the bag
+- Detail screen for each shoe:
+  - colour swatches
+  - EU/US/UK size options
+  - “Add to Bag” button
+- Bag tab:
+  - list of chosen items (name, colour, size, quantity)
+  - remove button
+  - total price at the bottom
 
-- Use **Kotlin Jetpack Compose**
-- No database is required; a **simple in-memory list** is enough
-- Let users **pick items**
-- Show the **shopping bag total**
-- Provide a **README/PDF** explaining how to configure and run the solution
-- Upload the **full Android Studio project** to GitHub and submit a ZIP to D2L
+All product data lives in an in‑memory list (`SampleData`) – no database or network.
 
-## What this solution includes
+## How to run it
 
-- A **splash / landing screen** inspired by the provided mockup
-- A **home screen** with:
-  - featured product banner
-  - category chips
-  - product grid
-  - quick add-to-bag buttons
-- A **product detail screen** with:
-  - color selection
-  - size selection
-  - add-to-bag action
-- A **bag tab** that shows chosen items and computes the **total price**
-- In-memory sample catalog, so the app works without any backend or database
+### In Android Studio (recommended)
 
-## Project structure
+1. Open this folder as a project: `exercises/exercise-1`.
+2. Use **JDK 17** for Gradle.
+3. Let Gradle sync finish.
+4. Run the `app` configuration on an emulator or phone.
 
-```text
-exercise-1/
-├── app/
-│   ├── build.gradle
-│   └── src/main/
-│       ├── AndroidManifest.xml
-│       ├── java/com/comp5450/mobileshop/
-│       │   ├── MainActivity.kt
-│       │   ├── data/
-│       │   └── ui/
-│       └── res/
-├── gradle/wrapper/
-├── build.gradle
-├── settings.gradle
-└── gradlew
-```
-
-## How to run
-
-### Option 1 — Android Studio
-
-1. Open this folder in **Android Studio**:
-   - `/Users/lmc/repos/mobile_programming/exercises/exercise-1`
-2. Make sure Gradle uses **JDK 17**
-3. Let Gradle sync finish
-4. Start an emulator or connect a physical Android phone
-5. Run the `app` configuration
-
-### Option 2 — command line
-
-If your machine has Android SDK + JDK 17 configured:
+### From the command line (if your SDK is set up)
 
 ```bash
-export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
+export JAVA_HOME=/path/to/jdk-17   # adjust for your machine
 cd /Users/lmc/repos/mobile_programming/exercises/exercise-1
 ./gradlew :app:assembleDebug
 ```
 
-## Build output
+The debug APK ends up here:
 
-The debug APK builds successfully at:
+`app/build/outputs/apk/debug/app-debug.apk`
 
-`/Users/lmc/repos/mobile_programming/exercises/exercise-1/app/build/outputs/apk/debug/app-debug.apk`
+## Files to pay attention to
 
-## Important environment notes
+- `MainActivity.kt` – entry point that wires the theme and navigation.
+- `data/Models.kt`, `data/SampleData.kt` – shoe models and hard‑coded catalogue.
+- `ui/ShopViewModel.kt` – search, selected category, bag contents, and total.
+- `ui/screens/*` – splash, home, detail, and bag screens built with Compose.
+- `ui/components/ProductHeroArt.kt` – fake “shoe card” artwork to match the mockup.
 
-- This project is set up for **Gradle on JDK 17**
-- `local.properties` points to the Android SDK used on this machine:
-  - `/opt/homebrew/share/android-commandlinetools`
-- If you open the project on another machine, Android Studio may regenerate `local.properties`
+## Submission checklist (for me)
 
-## Submission notes
+- [x] Project builds and runs on an emulator/phone.
+- [x] Users can add items to the bag and see the total.
+- [x] `README.pdf` in this folder explains how to run the app.
+- [x] Repo pushed to GitHub and ZIP exported for D2L.
 
-Before final submission, make sure you also include:
-
-- [ ] Your **public GitHub repository link**
-- [ ] A ZIP containing the full Android Studio project
-- [ ] Your Kotlin files + image assets + README PDF
-- [ ] App screenshots taken from your emulator or physical device
-
-## Rubric alignment
-
-This implementation is designed to cover the visible rubric categories:
-
-- **Programming (Kotlin)** — complete Compose app with navigation and state
-- **Functionality** — users can browse products, add items, and see bag total
-- **App design / responsive design** — polished layout with adaptive Compose UI
-
-## Integrity note
-
-You should still read through the code and make sure you can explain every screen, model, and state update before submitting.
+I’ve kept the design close to the sample images but focused mainly on getting clean, readable Kotlin code that I can walk through in class if asked.
