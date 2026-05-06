@@ -1,60 +1,81 @@
-# Exercise 1 – Kotlin Jetpack Compose mobile shop
+# Mobile Shop (Exercise 1)
 
-This is my solution for Exercise 1 (30 pts).  
-The goal is a small shoe shop built with **Kotlin + Jetpack Compose** where users can pick items and see a running total in the shopping bag.
+Kotlin + Jetpack Compose implementation of a simple shoe shop app for COMP5450.
 
-## What the app does
+The app lets users browse products, open product details, choose color/size, add items to a bag, and view the bag total.
 
-- Shows a **landing screen** similar to the handout.
-- Home screen:
-  - simple category chips (Lifestyle/Basketball/Running)
-  - grid of sample shoes
-  - quick “+” button to drop an item into the bag
-- Detail screen for each shoe:
-  - colour swatches
-  - EU/US/UK size options
-  - “Add to Bag” button
-- Bag tab:
-  - list of chosen items (name, colour, size, quantity)
-  - remove button
-  - total price at the bottom
+## Tech Stack
 
-All product data lives in an in‑memory list (`SampleData`) – no database or network.
+- Kotlin
+- Jetpack Compose (Material 3)
+- Android ViewModel + StateFlow
+- Gradle (Android project)
 
-## How to run it
+## Features
 
-### In Android Studio (recommended)
+- Landing/splash screen
+- Home screen with category chips and product grid
+- Product detail screen:
+  - color selection
+  - EU/US/UK size selection
+  - add-to-bag action
+- Bag screen:
+  - selected items list
+  - remove item action
+  - running total price
 
-1. Open this folder as a project: `exercises/exercise-1`.
-2. Use **JDK 17** for Gradle.
-3. Let Gradle sync finish.
-4. Run the `app` configuration on an emulator or phone.
+> Data source is in-memory sample data (`SampleData`), with no backend or database.
 
-### From the command line (if your SDK is set up)
+## Project Structure
+
+- `app/src/main/java/com/comp5450/mobileshop/MainActivity.kt`  
+  App entry point.
+- `app/src/main/java/com/comp5450/mobileshop/data/`  
+  Product/cart models and sample catalog.
+- `app/src/main/java/com/comp5450/mobileshop/ui/ShopViewModel.kt`  
+  Search, category selection, bag state, and total calculation.
+- `app/src/main/java/com/comp5450/mobileshop/ui/screens/`  
+  Compose screens (home, detail, bag, splash, profile placeholder).
+- `app/src/main/java/com/comp5450/mobileshop/ui/navigation/`  
+  Navigation host and routes.
+
+## Getting Started
+
+### Requirements
+
+- Android Studio (latest stable)
+- JDK 17 for Gradle
+- Android SDK + emulator (or a physical Android device)
+
+### Run in Android Studio
+
+1. Open `exercises/exercise-1` as a project.
+2. Set Gradle JDK to 17.
+3. Sync Gradle.
+4. Run the `app` configuration on an emulator/device.
+
+### Build from Terminal
 
 ```bash
-export JAVA_HOME=/path/to/jdk-17   # adjust for your machine
 cd /Users/lmc/repos/mobile_programming/exercises/exercise-1
+export JAVA_HOME="$(brew --prefix openjdk@17)"
+export PATH="$JAVA_HOME/bin:$PATH"
 ./gradlew :app:assembleDebug
 ```
 
-The debug APK ends up here:
+APK output:
 
-`app/build/outputs/apk/debug/app-debug.apk`
+- `app/build/outputs/apk/debug/app-debug.apk`
 
-## Files to pay attention to
+## Screenshots
 
-- `MainActivity.kt` – entry point that wires the theme and navigation.
-- `data/Models.kt`, `data/SampleData.kt` – shoe models and hard‑coded catalogue.
-- `ui/ShopViewModel.kt` – search, selected category, bag contents, and total.
-- `ui/screens/*` – splash, home, detail, and bag screens built with Compose.
-- `ui/components/ProductHeroArt.kt` – fake “shoe card” artwork to match the mockup.
+Runtime screenshots are included in `README.pdf`:
 
-## Submission checklist (for me)
+- Home
+- Product detail
+- Bag with total
+- Profile placeholder
 
-- [x] Project builds and runs on an emulator/phone.
-- [x] Users can add items to the bag and see the total.
-- [x] `README.pdf` in this folder explains how to run the app.
-- [x] Repo pushed to GitHub and ZIP exported for D2L.
+## Notes
 
-I’ve kept the design close to the sample images but focused mainly on getting clean, readable Kotlin code that I can walk through in class if asked.
+This project was built for course exercise requirements and focuses on clean app flow and functional shopping-bag behavior rather than production backend integration.
